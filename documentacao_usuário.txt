@@ -1,0 +1,18 @@
+Documentação para o usuário
+
+
+ATENÇÃO
+    - O diretório não pode ser alterado
+    - Não exclua nenhum arquivo
+    - A interface do programa está no arquivo app.exe
+    - O arquivo app.exe deve ser executado exclusivamente pela pasta onde está o projeto
+
+
+
+FUNCIONALIDADES
+    - Cadastrar produto
+    - Cadastrar compra
+    - Cadastrar venda
+    - Gerar nota fiscal e organizar pelo dia (VENDA)
+    - vizualização dos dados via tabela
+

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index.css') }}">
+    <link rel="stylesheet" type="text/css" href="../static/index.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <title>Gestão de estoque</title>
+</head>
+
+<body>
+    <header>
+        <a class="button" href="/home">Home</a>
+        <a class="button" href="/vendas">Vendas</a>
+        <a class="button" href="/compras">Compras</a>
+    </header>
+
+    <main>
+        <h1>Cadastrar Compra</h1>
+        <form method="post" action="{{request.path}}">
+            <div class="box_flex">
+                <div class="box_input">
+                    <label>COD</label>
+                    <select name="COD[]" id="COD" class="select_grande">
+                        {% for produto in produtos %}
+                        <option value="{{ produto.COD }}">COD: {{ produto.COD }}, {{produto.PRODUTO}},
+                            {{produto.MARCA}}, {{produto.PESO_E_LÍQUIDO}}, {{produto.UNIDADE_POR_FARDOS}} por fardo
+                        </option>
+                        {% endfor %}
+                    </select>
+                    <a class="button" href="/cadastro_produto">Cadastrar novo produto</a>
+                </div>
+
+                <div class="box_input">
+                    <label>Fardos</label>
+                    <input type="number" name="FARDOS[]" id="FARDOS" required />
+                </div>
+            </div>
+            <div id="newProduct" class="newProduct"></div>
+            <button type="button" class="btn-small" onclick="addProduct()">+</button>
+            <button type="submit">Cadastrar</button>
+        </form>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#COD').select2();
+        });
+        </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script>
+        function addProduct() {
+        var newProductDiv = document.getElementById('newProduct');
+        var boxFlex = document.createElement('div');
+        boxFlex.className = 'box_flex';
+        newProductDiv.appendChild(boxFlex);
+
+        var select = document.createElement('select');
+        select.name = 'COD[]';
+        select.innerHTML = document.getElementById('COD').innerHTML;
+        select.className = 'select_grande'; // Adicione a classe para manter o estilo
+        boxFlex.appendChild(select);
+
+        var input = document.createElement('input');
+        input.type = 'number';
+        input.name = 'FARDOS[]';
+        boxFlex.appendChild(input);
+
+        // Aplica o Select2 ao novo elemento select
+        $(select).select2();
+    }
+    </script>
+</body>
+
+</html>

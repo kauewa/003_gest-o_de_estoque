@@ -1,0 +1,205 @@
+:root {
+    --md-filled-tonal-button-container-shape: 0px;
+    --md-filled-tonal-button-label-text-font: system-ui;
+    --md-sys-color-secondary-container: rgba(22, 95, 253, 0.1);;
+    --md-sys-color-on-secondary-container: #050505;
+  }
+
+  p{
+    font-size: 26px;
+  }
+
+  .button{
+    background-color: var(--md-sys-color-secondary-container);
+    border: 0;
+    padding: 1rem;
+    align-self: center;
+    text-decoration: none;
+    color: #050505;
+  }
+  .button:hover{
+    background-color: rgba(2, 101, 167, 0.2);
+    cursor: pointer;
+  }
+
+  button{
+    background-color: var(--md-sys-color-secondary-container);
+    border: 0;
+    width: 200px;
+    height: 70px;
+    padding: 1rem;
+    align-self: center;
+    text-decoration: none;
+    color: #050505;
+    border-radius: 1rem;
+    margin: 10px;
+  }
+
+   select, input{
+    height: 2rem;
+    width: 200px;
+    border-radius: 5px;
+    border-style: groove;
+    background-color:white;
+    
+  }
+
+  .btn-small{
+    display: flex;
+    align-items: center;
+    background-color: rgb(0, 204, 255);
+    width: auto;
+    height: auto;
+    align-self: center;
+    text-decoration: none;
+    color: #050505;
+    border-radius: 1rem;
+    margin: 10px;
+  }
+  
+  .newProduct{
+    width: 100%;
+  }
+
+  .select_grande{
+    height: 2rem;
+    min-width: 400px;
+    border-radius: 5px;
+    border-style: groove;
+    background-color:white;
+  }
+
+  .input-moeda {
+    position: relative;
+  }
+  
+  .input-moeda::before {
+      content: "R$ ";
+      position: absolute;
+      left: 5px;
+  }
+  
+  button:hover{
+    background-color: rgba(2, 101, 167, 0.2);
+    cursor: pointer;
+  }
+
+  body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Work Sans', sans-serif;
+  }
+
+  table {
+    width: 50%;  /* Ajuste para o tamanho desejado */
+    max-height: 200px;  /* Ajuste para o tamanho desejado */
+    overflow: auto;
+    border-collapse: collapse;
+    font-size: 0.7em;  /* Ajuste para o tamanho desejado */
+  }
+  
+  table, th, td {
+    border: 1px solid black;
+    padding: 15px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  header{
+    margin-top: 2rem;
+    display: flex;
+    height: 3rem;
+    width: 100%;
+    background-color: var(--md-sys-color-secondary-container);
+    justify-content: center;
+  }
+
+  main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+    width: 90%;
+    min-height: 200px;
+  }
+
+  strong{
+    color: #0ce466;
+  }
+
+  .box_status{
+    padding: 1rem;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-evenly;
+    width: 70%;
+    height: 100px;
+    border-style: groove;
+    border-radius: 0.5rem;
+  }
+
+  form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .box_input{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .box_flex{
+    margin-top: 50px;
+    margin-bottom: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .valor{
+    margin: 0;
+    font-size: 80px;
+  }
+
+  .floating-button {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    position: fixed;
+    bottom: 20px;
+    font-size: 24px;
+    text-align: center;
+    color: white;
+    background: #0ce466;
+    line-height: 50px;
+    text-decoration: none; /* Remove o sublinhado do link */
+  }
+  
+  #floating-button-left {
+    left: 20px;
+  }
+  
+  #floating-button-right {
+    right: 20px;
+  }
+
+  .floating-button:hover::before {
+    content: attr(data-tooltip); /* O texto do tooltip */
+    position: absolute;
+    bottom: 60px; /* Posição do tooltip */
+    background-color: #333; /* Cor de fundo */
+    color: white; /* Cor do texto */
+    font-size: 14px;
+    border-radius: 5px; /* Bordas arredondadas */
+  }

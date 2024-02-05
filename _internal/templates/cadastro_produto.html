@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index.css') }}">
+    <link rel="stylesheet" type="text/css" href="../static/index.css">
+    <title>Gestão de estoque</title>
+</head>
+
+<body>
+    <header>
+        <a class="button" href="/home">Home</a>
+        <a class="button" href="/vendas">Vendas</a>
+        <a class="button" href="/compras">Compras</a>
+    </header>
+    <main>
+        <h1>Cadastrar Produto</h1>
+        <form method="post" action="{{request.path}}">
+            <div class="box_flex">
+                <div class="box_input">
+                    <label>COD</label>
+                    <input type="text" name="COD" id="COD" required/>
+                </div>
+                <div class="box_input">
+                    <label>Produto</label>
+                    <input type="text" name="PRODUTO" id="PRODUTO" required/>
+                </div>
+            </div>
+            <div class="box_flex">
+                <div class="box_input">
+                    <label>Marca</label>
+                    <input type="text" name="MARCA" id="MARCA" required />
+                </div>
+                <div class="box_input">
+                    <label>Peso/líquido</label>
+                    <input type="number" name="PESO_E_LÍQUIDO" id="PESO_E_LÍQUIDO" required/>
+                    <select name="unidade_medida" id="unidade_medida" required>
+                        <option value="ML" selected>ML</option>
+                        <option value="L">L</option>
+                        <option value="KG">KG</option>
+                        <option value="G">G</option>
+                        <option value="pct">pct</option>
+                    </select>
+                </div>
+            </div>
+            <div class="box_flex">
+                <div class="box_input">
+                    <label>Unidade por fardos</label>
+                    <input type="number" name="UNIDADE_POR_FARDOS" id="UNIDADE_POR_FARDOS" required />
+                </div>
+                <div class="box_input">
+                    <label>Valor por fardo</label>
+                    <input type="text" name="VALOR_POR_FARDO" id="VALOR_POR_FARDO"  required onkeyup="formatarComoMoeda(this)" />
+                </div>
+            </div>
+            
+            <button type="submit">Cadastrar</button>
+        </form>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </main>
+    <script>
+        function formatarComoMoeda(elemento) {
+            var valor = elemento.value.replace(/\D/g, '');
+            valor = (valor / 100).toFixed(2) + '';
+            valor = valor.replace(/(\d)(\d{3})(\d{3}),/g, "$1.$2.$3,");
+            valor = valor.replace(/(\d)(\d{3}),/g, "$1.$2,");
+            elemento.value = valor;
+        }
+    </script>
+</body>
+
+</html>

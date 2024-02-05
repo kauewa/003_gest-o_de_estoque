@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index.css') }}">
+    <link rel="stylesheet" type="text/css" href="../static/index.css">
+    <title>Gestão de estoque</title>
+</head>
+<body>
+    <header>
+        <a class="button" href="/home">Home</a>
+        <a class="button" href="/vendas">Vendas</a>
+        <a class="button" href="/compras">Compras</a>
+    </header>
+    <main>
+        <div class="box_flex">
+            <input type="text" id="myInput1" onkeyup="myFunction()" placeholder="Filtrar por COD..">
+            <input type="text" id="myInput2" onkeyup="myFunction()" placeholder="Filtrar por DATA..">
+            <input type="text" id="myInput3" onkeyup="myFunction()" placeholder="Filtrar por PRODUTO..">
+        </div>
+        {{ tabela | safe }}
+    </main>
+    <script>
+        function myFunction() {
+          var input1, input2, input3, filter1, filter2, filter3, table, tr, td1, td2, td3, td4, i;
+          input1 = document.getElementById("myInput1");
+          input2 = document.getElementById("myInput2");
+          input3 = document.getElementById("myInput3");
+          filter1 = input1.value.toUpperCase();
+          filter2 = input2.value.toUpperCase();
+          filter3 = input3.value.toUpperCase();
+          table = document.getElementsByTagName("table")[0];
+          tr = table.getElementsByTagName("tr");
+          for (i = 1; i < tr.length; i++) {
+            td1 = tr[i].getElementsByTagName("td")[0];
+            td2 = tr[i].getElementsByTagName("td")[1];
+            td3 = tr[i].getElementsByTagName("td")[5];
+            td4 = tr[i].getElementsByTagName("td")[10];
+            if (td1 && td2 && td3 && td4) {
+              txtValue1 = td1.textContent || td1.innerText;
+              txtValue2 = td2.textContent || td2.innerText;
+              txtValue3 = td3.textContent || td3.innerText;
+              txtValue4 = td4.textContent || td4.innerText;
+              if (txtValue1.toUpperCase().indexOf(filter1) > -1 && txtValue2.toUpperCase().indexOf(filter2) > -1 && txtValue3.toUpperCase().indexOf(filter3) > -1) {
+                tr[i].style.display = "";
+                // Alterando a cor de fundo da célula 'ESTOQUE' com base em seu valor
+                var estoque = parseInt(txtValue4);
+                if (estoque < 50) {
+                td4.style.backgroundColor = "#FF7F7F"; // vermelho claro
+                } else if (estoque >= 50 && estoque <= 200) {
+                td4.style.backgroundColor = "#FFFF7F"; // amarelo claro
+                } else {
+                td4.style.backgroundColor = "#7FFF7F"; // verde claro
+                }
+              } else {
+                tr[i].style.display = "none";
+              }
+            }       
+          }
+        }
+        // Chama a função myFunction assim que a página é carregada
+        window.onload = myFunction;
+        </script>
+    <a href="/cadastro_venda" data-tooltip="Venda" id="floating-button-left" class="floating-button">V</a>
+    <a href="/cadastro_compra" data-tooltip="Compra" id="floating-button-right" class="floating-button">C</a>
+</body>
+</html>
